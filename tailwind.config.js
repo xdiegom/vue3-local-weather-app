@@ -12,7 +12,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      Robot: ["Roboto", "sans-serif"]
+      roboto: ["Roboto", "sans-serif"]
     },
     container: {
       padding: "2rem",
