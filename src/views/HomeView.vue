@@ -4,7 +4,7 @@
       <input v-model="searchQuery" @input="getSearchResults" type="text" placeholder="Search for a city or state"
         class="py-2 px-1 w-full bg-transparent border-b duration-150 focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]">
       <ul v-if="mapBoxSearchResults?.length > 0 || searchError || (!searchError && mapBoxSearchResults?.length === 0)"
-        class="absolute bg-weather secondary text-white w-full shadow-md py-2 px-1 top-[66px]">
+        class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px]">
         <p v-if="searchError">Sorry, something went wrong, please try again</p>
         <p v-if="!searchError && mapBoxSearchResults.length === 0">No results match your query, try a different term.</p>
         <template v-else>
@@ -15,6 +15,15 @@
         </template>
       </ul>
     </div>
+
+    <div class="flex flex-col gap-4">
+      <Suspense>
+        <CityList/>
+        <template #fallback>
+          Loading...
+        </template>
+      </Suspense>
+    </div>
   </main>
 </template>
 
@@ -22,6 +31,7 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import CityList from '../components/CityList.vue';
 
 const mapboxAPIKey = import.meta.env.VITE_MAPBOX_API_KEY;
 const mapboxAPIUrl = import.meta.env.VITE_MAPBOX_API_URL;
