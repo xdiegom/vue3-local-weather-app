@@ -96,7 +96,8 @@
         </div>
 
         <div class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
-            @click="removeCity">
+            @click="removeCity"
+            v-if="!route.query.preview">
             <i class="fa-solid fa-trash"></i>
             <p>Remove City</p>
         </div>
@@ -128,6 +129,7 @@ const getWeatherData = async () => {
                 utc + 1000 * weatherData.data.timezone_offset;
         });
 
+        await new Promise(res => setTimeout(res, 1000));
         return weatherData.data;
 
     } catch (error) {
